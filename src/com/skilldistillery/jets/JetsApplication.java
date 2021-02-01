@@ -1,47 +1,76 @@
 package com.skilldistillery.jets;
 
 import java.util.Scanner;
-
 public class JetsApplication {
+	private Airfield newAirField;
 	private Scanner sc = new Scanner(System.in);
-								
-
-	//		private airField:AirField
-
-
-	
-
-	
-//	}
-	
-	
-//		public main(String[]:void
-	public static void main(String[] args) {
-		JetsApplication command = new JetsApplication();
-		command.launch();
+		public JetsApplication() {
 		}
-		private void launch() {
-			
+		public static void main(String[] args) {
+			JetsApplication newJetsApplication = new JetsApplication();
+			String textFile = "jets.txt";
+			newJetsApplication.newAirField = new Airfield(textFile);
+			newJetsApplication.run(textFile);
+		}
+		private void run(String textFile) {
+			System.out.println("");
+			boolean start = true;
+			while (start) {
+				displayUserMenu();
+				start = userInputMenu(textFile);
+			}
+			System.out.println("SECURE LINK TERMINATED, EXITING");
+			System.exit(0);
+		}
+		private void displayUserMenu() {
+			System.out.println();
+			System.out.println("SECURE OPERATIONS MENU:");
+			System.out.println("LIST FLEET [1]");
+			System.out.println("FLY ALL JETS [2]");
+			System.out.println("VIEW FASTEST JET [3]");
+			System.out.println("VIEW JET WITH LONGEST RANGE [4]");
+			System.out.println("LOAD ALL THE CARGO JETS [5]");
+			System.out.println("DOGFIGHT! [6]");
+			System.out.println("ADD A JET TO THE FLEET [7]");
+			System.out.println("REMOVE A JET FROM FLEET [8]");
+			System.out.println("QUIT [9]");
+		}
+		private boolean userInputMenu(String textFile) {
 
-//		private displayUserMenu(): void
-		System.out.println("List fleet");
-		System.out.println("Fly all jets");
-		System.out.println("View fastest jet");
-		System.out.println("View jet with longest range");
-		System.out.println("Load all Cargo Jets");
-		System.out.println("Dogfight!");
-		System.out.println("Add a jet to Fleet");
-		System.out.println("Remove a jet from Fleet");
-		System.out.println("Quit");
-		
-				}
-//		authorizedPersonnelInput = sc.nextInt();
-		
-		
-		
-//		public JetsApplication()
+			int userSelection = sc.nextInt();
+			System.out.println();
 
-	
-
-}
-
+			switch (userSelection) {
+			case 1:
+				newAirField.listFleet();
+				break;
+			case 2:
+				newAirField.flyAllJets();
+				break;
+			case 3:
+				newAirField.DisplayFastestAircraft();
+				break;
+			case 4:
+				newAirField.LongestRangeAircraft();
+				break;
+			case 5:
+				newAirField.loadCargoJets();
+				break;
+			case 6:
+				newAirField.dogfight();
+				break;
+			case 7:
+				newAirField.addAircraft(sc);
+				break;
+			case 8:
+				newAirField.removeAircraft(sc);
+				break;
+			case 9:
+				return false;
+			default:
+				System.err.println("INCORRECT ENTRY. ENTER VALID ENTRY" + userSelection);
+				break;
+			}
+			return true;
+		}
+	}

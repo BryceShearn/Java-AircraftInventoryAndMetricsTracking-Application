@@ -1,9 +1,5 @@
 package com.skilldistillery.jets;
 
-public class CargoCarrier {
-
-	
-	//public loadCargo():void;
-	
-	
+public interface CargoCarrier  {
+	public void loadCargo();
 }
